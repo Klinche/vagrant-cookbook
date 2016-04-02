@@ -1,11 +1,11 @@
 search('aws_opsworks_app', 'deploy:true').each do |app|
   Chef::Log.info("********** Starting To Create Database Mysql: '#{app[:name]}' **********")
 
-  root_user = node[:deploy]["#{app[:shortname]}"][:database][:database_username]
-  root_pass = node[:deploy]["#{app[:shortname]}"][:database][:database_password]
-  port = node[:deploy]["#{app[:shortname]}"][:database][:database_port]
-  name = node[:deploy]["#{app[:shortname]}"][:database][:database_name]
-  host = node[:deploy]["#{app[:shortname]}"][:database][:database_host]
+  root_user = node[:deploy][(app[:shortname]).to_s][:database][:database_username]
+  root_pass = node[:deploy][(app[:shortname]).to_s][:database][:database_password]
+  port = node[:deploy][(app[:shortname]).to_s][:database][:database_port]
+  name = node[:deploy][(app[:shortname]).to_s][:database][:database_name]
+  host = node[:deploy][(app[:shortname]).to_s][:database][:database_host]
 
   mysql_service 'default' do
     action [:stop, :delete]
