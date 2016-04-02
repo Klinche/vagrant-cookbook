@@ -29,7 +29,7 @@ search('aws_opsworks_app', 'deploy:true').each do |app|
   end
 
   execute 'Update permissions' do
-    command "mysql -h #{host} -P #{port} --password=#{root_pass} -u #{root_user} -e \"GRANT ALL ON *.* to #{root_user}@'%' IDENTIFIED BY '#{root_pass}';\""
+    command "mysql -h #{host} -P #{port} --password=#{root_pass} -u #{root_user} -e \"GRANT ALL ON *.* to '#{root_user}'@'%' IDENTIFIED BY '#{root_pass}';\""
   end
 
 end
