@@ -1,2 +1,12 @@
-# vagrant-cookbook
-Recipes used for a development environment
+Description
+===========
+
+Requirements
+============
+
+Attributes
+==========
+
+Usage
+=====
+
