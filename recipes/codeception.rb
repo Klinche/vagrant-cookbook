@@ -38,6 +38,10 @@ script "XDebug" do
       pecl install xdebug
       rm -rf /etc/php/7.0/mods-available/xdebug.ini
       echo "zend_extension=xdebug.so" > /etc/php/7.0/mods-available/xdebug.ini
+      echo "xdebug.remote_enable = on" >> /etc/php/7.0/mods-available/xdebug.ini
+      echo "xdebug.remote_connect_back = on" >> /etc/php/7.0/mods-available/xdebug.ini
+      echo "xdebug.idekey = 'vagrant'" >> /etc/php/7.0/mods-available/xdebug.ini
+      echo "xdebug.remote_host = '192.168.33.1'" >> /etc/php/7.0/mods-available/xdebug.ini
       phpenmod xdebug
   EOH
 end
