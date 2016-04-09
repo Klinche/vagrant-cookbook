@@ -8,17 +8,36 @@ script 'Install Codeception' do
   EOH
 end
 
-# script "Enable XDebug" do
-#   interpreter 'bash'
-#   user 'root'
-#   code <<-EOH
-#       php5enmod xdebug
-#   EOH
-# end
+%w{php7.0-dev php-pear}.each do |pkg|
+  script "Reconfigure all outstanding packages in case package before #{pkg} fails us" do
+    interpreter 'bash'
+    user 'root'
+    code <<-EOH
+        sudo dpkg --configure -a
+    EOH
+  end
 
-#
-# php_pear 'xdebug' do
-#   version '2.4.0RC4'
-#   action :upgrade
-#   preferred_state 'beta'
-# end
+  package pkg do
+    timeout 4000
+    action :upgrade
+  end
+
+  script "Reconfigure all outstanding packages in case #{pkg} fails us" do
+    interpreter 'bash'
+    user 'root'
+    code <<-EOH
+      sudo dpkg --configure -a
+    EOH
+  end
+end
+
+script "XDebug" do
+  interpreter 'bash'
+  user 'root'
+  code <<-EOH
+      pecl install xdebug
+      rm -rf /etc/php/7.0/mods-available/xdebug.ini
+      echo "zend_extension=xdebug.so" > /etc/php/7.0/mods-available/xdebug.ini
+      phpenmod xdebug
+  EOH
+end
