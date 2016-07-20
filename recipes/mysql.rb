@@ -12,7 +12,7 @@ search('aws_opsworks_app', 'deploy:true').each do |app|
   end
 
   # master
-  mysql_service "mysql-#{app[:shortname]}" do
+  mysql_service "#{app[:shortname]}" do
     port port
     version '5.6'
     bind_address '0.0.0.0'
