@@ -8,7 +8,7 @@ search('aws_opsworks_app', 'deploy:true').each do |app|
   host = node[:deploy][(app[:shortname]).to_s][:database][:database_host]
 
   mysql_service 'default' do
-    action [:stop, :delete]
+    action [:stop]
   end
 
   # master
