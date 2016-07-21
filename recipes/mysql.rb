@@ -16,6 +16,10 @@ search('aws_opsworks_app', 'deploy:true').each do |app|
   
   packageName = "mysql-server"
   packageName = 'mysql-server-5.7' if node['platform'] == 'ubuntu' && node['platform_version'] == '16.04'
+  
+  packageVersion = nil
+  packageVersion = '5.7.12-0ubuntu1' if node['platform'] == 'ubuntu' && node['platform_version'] == '16.04'
+
 
   # master
   mysql_service "#{app[:shortname]}" do
