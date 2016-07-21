@@ -13,12 +13,16 @@ search('aws_opsworks_app', 'deploy:true').each do |app|
 
   versionM = '5.6'
   versionM = '5.7' if node['platform'] == 'ubuntu' && node['platform_version'] == '16.04'
+  
+  packageName = "mysql-server"
+  packageName = 'mysql-server-5.7' if node['platform'] == 'ubuntu' && node['platform_version'] == '16.04'
 
   # master
   mysql_service "#{app[:shortname]}" do
     port port
     version version
     bind_address '0.0.0.0'
+    package_name packageName
     initial_root_password root_pass
     action [:create, :start]
   end
