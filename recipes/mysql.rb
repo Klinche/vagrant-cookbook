@@ -23,6 +23,7 @@ search('aws_opsworks_app', 'deploy:true').each do |app|
     version version
     bind_address '0.0.0.0'
     package_name packageName
+    package_version nil
     initial_root_password root_pass
     action [:create, :start]
   end
