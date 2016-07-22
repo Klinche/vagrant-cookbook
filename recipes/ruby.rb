@@ -7,6 +7,9 @@
 # All rights reserved - Do Not Redistribute
 #
 
+
+search('aws_opsworks_app', 'deploy:true').each do |app|
+
 release_user = node[:deploy]["#{app[:shortname]}"][:release_user]
 release_group = node[:deploy]["#{app[:shortname]}"][:release_group]
 
@@ -33,4 +36,5 @@ end
 ruby_block 'set new ruby for chef run' do
   block { ENV['PATH'] = "/home/#{release_user}/.rvm/gems/ruby-2.1.6/bin:/home/#{release_user}/.rvm/gems/ruby-2.1.6@global/bin:/home/#{release_user}/.rvm/rubies/ruby-2.1.6/bin:#{ENV['PATH']}:/home/#{release_user}/.rvm/bin" }
   not_if { ENV['PATH'].include?('rvm') }
+end
 end
