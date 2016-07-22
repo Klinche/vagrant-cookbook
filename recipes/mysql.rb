@@ -29,6 +29,8 @@ search('aws_opsworks_app', 'deploy:true').each do |app|
     package_name packageName
     package_version packageVersion
     initial_root_password root_pass
+    run_user 'ubuntu'
+    run_group 'ubuntu'
     action [:create, :start]
   end
 
