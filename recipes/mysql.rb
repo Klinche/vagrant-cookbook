@@ -22,7 +22,7 @@ search('aws_opsworks_app', 'deploy:true').each do |app|
 
 
   # master
-  mysql_service "#{app[:shortname]}" do
+  mysql_service "default" do
     port port
     version version
     bind_address '0.0.0.0'
