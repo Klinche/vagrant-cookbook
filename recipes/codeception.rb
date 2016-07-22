@@ -1,6 +1,11 @@
+search('aws_opsworks_app', 'deploy:true').each do |app|
+
+release_user = node[:deploy]["#{app[:shortname]}"][:release_user]
+release_group = node[:deploy]["#{app[:shortname]}"][:release_group]
+
 script 'Install Codeception' do
   interpreter 'bash'
-  user 'vagrant'
+  user release_user
   cwd '/vagrant'
   code <<-EOH
     rm -rf codecept.phar && exit 0
@@ -44,4 +49,5 @@ script "XDebug" do
       echo "xdebug.remote_host = '192.168.33.1'" >> /etc/php/7.0/mods-available/xdebug.ini
       phpenmod xdebug
   EOH
+end
 end
