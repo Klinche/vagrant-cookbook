@@ -18,7 +18,7 @@ search('aws_opsworks_app', 'deploy:true').each do |app|
   packageName = 'mysql-server-5.7' if node['platform'] == 'ubuntu' && node['platform_version'] == '16.04'
   
   packageVersion = nil
-  packageVersion = '5.7.13-0ubuntu0.16.04.2' if node['platform'] == 'ubuntu' && node['platform_version'] == '16.04'
+  #packageVersion = '5.7.13-0ubuntu0.16.04.2' if node['platform'] == 'ubuntu' && node['platform_version'] == '16.04'
 
 
   # master
