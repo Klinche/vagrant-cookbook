@@ -34,7 +34,11 @@ search('aws_opsworks_app', 'deploy:true').each do |app|
   
   #The package installs a version of mysql and auto starts it which conflicts with us.
   execute 'stop old mysql' do
-    command "/bin/systemctl --system start mysql > /dev/null 2> /dev/null"
+    command "/bin/systemctl --system stop mysql > /dev/null 2> /dev/null"
+  end
+  
+  execute 'delete old mysql' do
+    command "systemctl disable mysql > /dev/null 2> /dev/null"
   end
   
   mysql_service "default" do
