@@ -29,9 +29,18 @@ search('aws_opsworks_app', 'deploy:true').each do |app|
     package_name packageName
     package_version packageVersion
     initial_root_password root_pass
-    action [:create, :start]
+    action [:create]
   end
-
+  
+  #The package installs a version of mysql and auto starts it which conflicts with us.
+  execute 'stop old mysql' do
+    command "/bin/systemctl --system start mysql > /dev/null 2> /dev/null"
+  end
+  
+  mysql_service "default" do
+    action [:start]     
+  end
+  
   execute 'drop database' do
     command "mysql -h #{host} -P #{port} --password=#{root_pass} -u #{root_user} -e 'drop database #{name}'; > /dev/null 2> /dev/null"
   end
