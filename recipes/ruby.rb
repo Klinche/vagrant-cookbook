@@ -21,7 +21,7 @@ script 'Vagrant Use Ruby 2.1.6' do
   environment  'HOME' => "/home/#{release_user}"
   code <<-EOH
     gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-    curl -sSL https://get.rvm.io | bash -s stable
+    curl -sSL https://get.rvm.io | bash -s -- --path /home/#{release_user}/.rvm
     source ~/.rvm/scripts/rvm
     usermod -a -G rvm #{release_user}
     rvm install ruby-2.1.6 || true
