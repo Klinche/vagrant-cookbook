@@ -23,8 +23,8 @@ script 'Vagrant Use Ruby 2.1.6' do
     gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
     curl -sSL https://get.rvm.io | bash -s stable
     source ~/.rvm/scripts/rvm
-    usermod -a -G rvm #{release_user}
-    rvm install ruby-2.1.6 || true
+    sudo usermod -a -G rvm #{release_user}
+    sudo rvm install ruby-2.1.6 || true
     rvm --default use 2.1.6
     curl -sSL https://rvm.io/mpapis.asc | gpg --import -
     rvm get head
