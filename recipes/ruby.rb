@@ -13,7 +13,25 @@ search('aws_opsworks_app', 'deploy:true').each do |app|
 release_user = node[:deploy]["#{app[:shortname]}"][:release_user]
 release_group = node[:deploy]["#{app[:shortname]}"][:release_group]
 
+group "#{release_group}" do
+  action :create
+  append true
+end
+  
+user "#{release_user}" do
+  gid release_group
+  shell '/bin/bash'
+  home "/home/#{release_user}"
+  system true
+  action :create
+end
 
+group "sudo" do
+  action :modify
+  members "#{release_user}"
+  append true
+end
+  
 script 'Vagrant Use Ruby 2.1.6' do
   interpreter 'bash'
   cwd '/vagrant'
