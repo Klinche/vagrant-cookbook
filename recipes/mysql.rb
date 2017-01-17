@@ -13,7 +13,6 @@ search('aws_opsworks_app', 'deploy:true').each do |app|
     version '5.7'
     bind_address '0.0.0.0'
     initial_root_password root_pass
-    service_manager "upstart"
     action [:create, :start]
   end
   
